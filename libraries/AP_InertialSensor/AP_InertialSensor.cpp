@@ -672,6 +672,12 @@ AP_InertialSensor *AP_InertialSensor::get_singleton()
     return _singleton;
 }
 
+void AP_InertialSensor::accelRegionReset(){
+	&_accel = INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
+	&_accel_filtered = INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+	&_delta_velocity_acc = INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+}
+
 /*
   register a new gyro instance
  */

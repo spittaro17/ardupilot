@@ -48,6 +48,7 @@
 #include <Filter/NotchFilter.h>
 #include <Filter/HarmonicNotchFilter.h>
 #include <AP_Math/polyfit.h>
+#include <AP_RMM/AP_RMM.h>
 
 class AP_InertialSensor_Backend;
 class AuxiliaryBus;
@@ -71,6 +72,8 @@ class AP_InertialSensor : AP_AccelCal_Client
     friend class AP_InertialSensor_Backend;
 
 public:
+    RMM INSaccelRegion = RMM(1024*1024);
+
     AP_InertialSensor();
 
     /* Do not allow copies */
@@ -435,6 +438,8 @@ public:
 
     // force save of current calibration as valid
     void force_save_calibration(void);
+
+    void accelRegionReset();
 
 private:
     // load backend drivers

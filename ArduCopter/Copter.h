@@ -24,6 +24,7 @@
 #include <cmath>
 #include <stdio.h>
 #include <stdarg.h>
+#include <AP_RMM/AP_RMM.h>
 
 #include <AP_HAL/AP_HAL.h>
 
@@ -226,6 +227,8 @@ public:
     Copter(void);
 
 private:
+
+    void accelRegionReset();
 
     // key aircraft parameters passed to multiple libraries
     AP_Vehicle::MultiCopter aparm;
