@@ -673,9 +673,9 @@ AP_InertialSensor *AP_InertialSensor::get_singleton()
 }
 
 void AP_InertialSensor::accelRegionReset(){
-	&_accel = INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
-	&_accel_filtered = INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
-	&_delta_velocity_acc = INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+	_accel = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
+	_accel_filtered = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+	_delta_velocity_acc = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
 }
 
 /*

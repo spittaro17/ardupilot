@@ -478,19 +478,20 @@ private:
     float _loop_delta_t_max;
 
     // Most recent accelerometer reading
-    Vector3f _accel[INS_MAX_INSTANCES];
+    //Vector3f _accel[INS_MAX_INSTANCES];
+    Vector3f* _accel = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
     Vector3f _delta_velocity[INS_MAX_INSTANCES];
     float _delta_velocity_dt[INS_MAX_INSTANCES];
     bool _delta_velocity_valid[INS_MAX_INSTANCES];
     // delta velocity accumulator
-    Vector3f _delta_velocity_acc[INS_MAX_INSTANCES];
+    Vector3f* _delta_velocity_acc = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
     // time accumulator for delta velocity accumulator
     float _delta_velocity_acc_dt[INS_MAX_INSTANCES];
 
     // Low Pass filters for gyro and accel
     LowPassFilter2pVector3f _accel_filter[INS_MAX_INSTANCES];
     LowPassFilter2pVector3f _gyro_filter[INS_MAX_INSTANCES];
-    Vector3f _accel_filtered[INS_MAX_INSTANCES];
+    Vector3f* _accel_filtered = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
     Vector3f _gyro_filtered[INS_MAX_INSTANCES];
 #if HAL_WITH_DSP
     // Thread-safe public version of _last_raw_gyro
