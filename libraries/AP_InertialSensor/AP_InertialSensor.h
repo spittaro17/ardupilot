@@ -73,6 +73,7 @@ class AP_InertialSensor : AP_AccelCal_Client
 
 public:
     RMM INSaccelRegion = RMM(1024*1024);
+    RMM INSgyroRegion = RMM(1024*1024);
 
     AP_InertialSensor();
 
@@ -440,6 +441,7 @@ public:
     void force_save_calibration(void);
 
     void accelRegionReset();
+    void gyroRegionReset();
 
 private:
     // load backend drivers
@@ -492,7 +494,7 @@ private:
     LowPassFilter2pVector3f _accel_filter[INS_MAX_INSTANCES];
     LowPassFilter2pVector3f _gyro_filter[INS_MAX_INSTANCES];
     Vector3f* _accel_filtered = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
-    Vector3f _gyro_filtered[INS_MAX_INSTANCES];
+    Vector3f* _gyro_filtered = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
 #if HAL_WITH_DSP
     // Thread-safe public version of _last_raw_gyro
     Vector3f _gyro_raw[INS_MAX_INSTANCES];
@@ -514,7 +516,7 @@ private:
     uint8_t _num_calculated_harmonic_notch_frequencies;
 
     // Most recent gyro reading
-    Vector3f _gyro[INS_MAX_INSTANCES];
+    Vector3f* _gyro = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
     Vector3f _delta_angle[INS_MAX_INSTANCES];
     float _delta_angle_dt[INS_MAX_INSTANCES];
     bool _delta_angle_valid[INS_MAX_INSTANCES];

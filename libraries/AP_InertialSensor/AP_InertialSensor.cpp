@@ -678,6 +678,12 @@ void AP_InertialSensor::accelRegionReset(){
 	_delta_velocity_acc = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
 }
 
+void AP_InertialSensor::gyroRegionReset(){
+	_gyro = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
+	_gyro_filtered = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+
+}
+
 /*
   register a new gyro instance
  */
