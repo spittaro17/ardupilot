@@ -676,11 +676,14 @@ void AP_InertialSensor::accelRegionReset(){
 	_accel = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
 	_accel_filtered = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
 	_delta_velocity_acc = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+	_accel_filter =  (LowPassFilter2pVector3f*) INSaccelRegion.allocate(sizeof(LowPassFilter2pVector3f) *INS_MAX_INSTANCES);
+
 }
 
 void AP_InertialSensor::gyroRegionReset(){
 	_gyro = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
 	_gyro_filtered = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) * INS_MAX_INSTANCES);
+	_gyro_filter = (LowPassFilter2pVector3f*) INSgyroRegion.allocate(sizeof(LowPassFilter2pVector3f) *INS_MAX_INSTANCES);
 
 }
 

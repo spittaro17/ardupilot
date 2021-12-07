@@ -17,6 +17,8 @@ public:
 
     RMM* create_nested_region(int size_in_bytes);
 
+    void create_new_pool(int);
+
     void print_status();
 
     void dump_region();

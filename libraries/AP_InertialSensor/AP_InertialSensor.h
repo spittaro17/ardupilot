@@ -491,8 +491,10 @@ private:
     float _delta_velocity_acc_dt[INS_MAX_INSTANCES];
 
     // Low Pass filters for gyro and accel
-    LowPassFilter2pVector3f _accel_filter[INS_MAX_INSTANCES];
-    LowPassFilter2pVector3f _gyro_filter[INS_MAX_INSTANCES];
+    //LowPassFilter2pVector3f _accel_filter[INS_MAX_INSTANCES];
+    //LowPassFilter2pVector3f _gyro_filter[INS_MAX_INSTANCES];
+    LowPassFilter2pVector3f* _accel_filter = (LowPassFilter2pVector3f*) INSaccelRegion.allocate(sizeof(LowPassFilter2pVector3f) *INS_MAX_INSTANCES);
+    LowPassFilter2pVector3f* _gyro_filter = (LowPassFilter2pVector3f*) INSgyroRegion.allocate(sizeof(LowPassFilter2pVector3f) *INS_MAX_INSTANCES);
     Vector3f* _accel_filtered = (Vector3f*) INSaccelRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
     Vector3f* _gyro_filtered = (Vector3f*) INSgyroRegion.allocate(sizeof(Vector3f) *INS_MAX_INSTANCES);
 #if HAL_WITH_DSP

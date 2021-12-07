@@ -33,6 +33,16 @@ RMM::~RMM() {
 	    }
 }
 
+void RMM::create_new_pool(int size_in_bytes){
+	pool = new char[size_in_bytes+FULL];
+	bool* temp1 = (bool*) (pool+TOP_LEVEL);
+	int* temp2 = (int*) (pool+SIZE);
+	int* temp3 = (int*) (pool+OFFSET);
+	*temp1 = true;
+	*temp2 = size_in_bytes;
+	*temp3 = 0+FULL;
+}
+
 void* RMM::allocate(int size_in_bytes) {
 	    int* freetemp = (int*) (pool+OFFSET);
 	    int* sizetemp = (int*) (pool+SIZE);
@@ -44,8 +54,13 @@ void* RMM::allocate(int size_in_bytes) {
 }
 
 void RMM::reset() {
-	    int* freetemp = (int*) (pool+OFFSET);
-	    *freetemp = 0+FULL;
+	    /*int* freetemp = (int*) (pool+OFFSET);
+	    *freetemp = 0+FULL;*/
+	 bool* temp1 = (bool*) (pool+TOP_LEVEL);
+	    if (*temp1 == true){
+		    delete [] (char*)pool;
+	    }
+   
 }
 
 RMM* RMM::create_nested_region(int size_in_bytes) {

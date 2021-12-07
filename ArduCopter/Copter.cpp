@@ -227,8 +227,8 @@ constexpr int8_t Copter::_failsafe_priorities[7];
 // Main loop - 400hz
 void Copter::fast_loop()
 {
-    ins.gyroRegionReset();
-    ins.accelRegionReset();
+    //ins.gyroRegionReset();
+    //ins.accelRegionReset();
     // update INS immediately to get current gyro data populated
     ins.update();
 
@@ -262,6 +262,9 @@ void Copter::fast_loop()
     // update home from EKF if necessary
     update_home_from_EKF();
 
+    //ins.INSgyroRegion.reset();
+    //ins.INSaccelRegion.reset();
+
     // check if we've landed or crashed
     update_land_and_crash_detectors();
 
@@ -277,7 +280,12 @@ void Copter::fast_loop()
 
     ins.INSgyroRegion.reset();
     ins.INSaccelRegion.reset();
+    ins.INSgyroRegion.create_new_pool(1024*1024);
+    ins.INSaccelRegion.create_new_pool(1024*1024);
+    ins.gyroRegionReset();
+    ins.accelRegionReset();
 
+    
     AP_Vehicle::fast_loop();
 }
 
